@@ -1,4 +1,4 @@
-import streamlit as st  # type: ignore
+import streamlit as st   # type: ignore
 import pandas as pd  # type: ignore
 import os
 from io import BytesIO
@@ -45,7 +45,7 @@ if uploaded_files:
         #data cleaning options
         st.subheader("🛠 Data Cleaning Options")
         if st.checkbox(f"Clean data for {file.name}"):
-            col1,col2 = st.columns(2)
+            col1, col2 = st.columns(2)
 
             with col1:
                 if st.button(f"Remove duplicates from the file : {file.name}"):
@@ -72,15 +72,15 @@ if uploaded_files:
 
 st.subheader("🔄 Conversion Options")
 conversion_type = st.radio(f"Convert {file.name} to:", ["CSV", "Excel"], key=file.name)
-if st.button(f"Conert{file.name}"):
+if st.button(f"Conert {file.name}"):
     buffer = BytesIO()
     if conversion_type == "CSV":
-     df.to.to_csv(buffer, index=False)
+     df.to_csv(buffer, index=False)
     file_name = file.name.replace(file_ext, ".csv")
     mime_type = "text/csv"
 
 elif conversion_type == "Excel":
-    df.to_eccel(Buffer, index=False)
+    df.to_excel(buffer, index=False)  # type: ignore
     file_name = file.name.replace(file_ext, ".xlsx")
     mime_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 buffer.seek(0)
@@ -89,7 +89,7 @@ st.download_button(
     label=f"Download {file_name} as {conversion_type}",
     data=buffer,
     file_name=file_name,
-   mime=mime_type
+    mime=mime_type
 )
 
 
